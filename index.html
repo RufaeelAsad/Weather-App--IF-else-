@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+    <h1>Weather APP</h1>
+    <br>
+    <button onclick="temp()">Check Temperture</button>
+    <h1 id="temperture"></h1>
+    <br>
+    <br>
+    <br>
+    <h1>Suggestion</h1>
+    <h1 id="result"></h1>
+
+
+
+
+
+    <script>
+
+        document.body.style.background = "#f3f3f3 url('img_tree.png') no-repeat right top";
+
+
+        var temperture;
+        var result;
+
+        function temp() {
+
+            temperture = document.getElementById("temperture");
+
+            axios.get('https://api.openweathermap.org/data/2.5/weather?q=islamabad&appid=b549acf389972fa9ada20f3205a434f8&units=metric')
+                .then(function (response) {
+
+
+                    temperture.innerText = response.data.main.temp;
+
+                    let temp1 = response.data.main.temp;
+
+
+                    result = document.getElementById("result");
+
+
+                    if (temp1 < 0) {
+
+                        result.innerText = "dont go out its too cold";
+
+                    } else if (temp1 >= 0 && temp1 <= 25) {
+
+                        result.innerText = "carry jacket";
+
+                    } else if (temp1 > 25 && temp1 <= 35) {
+
+                        result.innerTExt = "no need to carry jacket";
+
+                    } else if (temp1 > 35) {
+
+                        result.innerText = "its too hot, dont go out";
+
+                    }
+
+
+                })
+                .catch(function (error) {
+                    // handle error
+                    console.log(error);
+                })
+                .then(function () {
+                    // always executed
+                });
+
+
+
+        }
+
+
+
+
+    </script>
+
+
+
+</body>
+
+</html>
